@@ -1,0 +1,61 @@
+{
+  "name": "hueify",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "bin": {
+    "hueify": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "webpack && electron main.js",
+    "dev": "webpack -w & electron main.js",
+    "test": "npm run lint",
+    "lint": "standard | snazzy",
+    "lint:fix": "standard --fix | snazzy",
+    "build": "npm test && ./node_modules/.bin/electron-packager . Hueify --all --asar --ignore='\\.env' --out=./dist --overwrite",
+    "build:osx": "npm test && electron-packager . Hueify --platform=darwin --ignore='\\.env' --asar --out=./dist --overwrite",
+    "build:test": "npm test && ./node_modules/.bin/electron-packager . Hueify --all --ignore='\\.env' --out=./dist --overwrite",
+    "build:linux": "npm test && ./node_modules/.bin/electron-packager . Hueify --platform=linux --ignore='\\.env' --asar --out=./dist --overwrite",
+    "build:win": "npm test && ./node_modules/.bin/electron-packager . Hueify --platform=win32 --ignore='\\.env' --asar --out=./dist --overwrite"
+  },
+  "keywords": [
+    "philips",
+    "hue",
+    "hueify",
+    "electron",
+    "controller"
+  ],
+  "author": "Frederik Kvartborg",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.4.0",
+    "babel-plugin-transform-react-jsx": "^6.23.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "css-loader": "^0.26.4",
+    "electron-packager": "^8.5.2",
+    "postcss-loader": "^1.3.3",
+    "preact": "^7.2.0",
+    "preact-views": "^1.0.0",
+    "redux": "^3.6.0",
+    "style-loader": "^0.13.2",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "debounce": "^1.0.0",
+    "electron": "^1.6.2",
+    "electron-positioner": "^3.0.0",
+    "node-hue-api": "^2.4.2"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "h"
+    ],
+    "ignore": [
+      "static"
+    ]
+  }
+}

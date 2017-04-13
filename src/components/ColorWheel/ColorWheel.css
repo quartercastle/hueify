@@ -1,0 +1,29 @@
+.color-overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background: var(--body-bg);
+  align-items: center;
+  animation: fadeIn .1s ease-in;
+}
+
+.color-overlay .wheel {
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  animation: scaleIn .1s ease-in;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: rotate(45deg) scale(.7); }
+  to { opacity: 1; transform: rotate(0deg) scale(1); }
+}

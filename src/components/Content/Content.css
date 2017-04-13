@@ -1,0 +1,32 @@
+section.content {
+  position: absolute;
+  top: var(--header-height);
+  bottom: 0px;
+  width: 100%;
+  overflow: scroll;
+  background: var(--body-bg);
+  padding: 0px var(--spacing);
+}
+
+.content ul {
+  margin: 0px calc(var(--spacing) * -1);
+  padding: 0px;
+}
+
+.content ul li {
+  list-style: none;
+  padding: calc(var(--spacing) / 2) var(--spacing);
+  border-bottom: var(--border);
+  cursor: pointer;
+}
+
+.content ul li small {
+  font-size: calc(var(--font-size) / 1.5);
+  display: block;
+}
+
+.content ul li a {
+  text-align: center;
+  display: block;
+  color: var(--blue);
+}
