@@ -23,7 +23,8 @@ export default WrappedComponent => {
 
       const api = new HueApi(
         this.props.settings.host,
-        this.props.bridge.token
+        this.props.bridge.token,
+        2000
       )
 
       this.setState({ api }, () => {
