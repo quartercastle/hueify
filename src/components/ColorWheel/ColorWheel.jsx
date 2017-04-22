@@ -5,6 +5,7 @@ import './ColorWheel.css'
 export default class ColorWheel extends Component {
   canvas = null
   size = 250
+  center = null
 
   componenDidMount () {
     this.setupCanvas()
@@ -26,6 +27,7 @@ export default class ColorWheel extends Component {
 
     process.nextTick(() => {
       this.canvas = document.querySelector('#canvas')
+      this.center = [this.canvas.width / 2, this.canvas.height / 2]
       this.drawCircle()
       this.drawInnerCircle()
       this.convertImageToCanvas(this.convertCanvasToImage())
@@ -34,8 +36,7 @@ export default class ColorWheel extends Component {
 
   drawCircle () {
     const context = this.canvas.getContext('2d')
-    const x = this.canvas.width / 2
-    const y = this.canvas.height / 2
+    const [x, y] = this.center
     const radius = this.size / 2
 
     for (let angle = 0; angle <= 360; angle++) {
@@ -52,8 +53,7 @@ export default class ColorWheel extends Component {
 
   drawInnerCircle () {
     const context = this.canvas.getContext('2d')
-    const x = this.canvas.width / 2
-    const y = this.canvas.height / 2
+    const [x, y] = this.center
     const radius = this.size / 2
 
     const innerRadius = 10
