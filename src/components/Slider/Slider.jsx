@@ -1,5 +1,4 @@
 import { Component } from 'preact'
-import debounce from 'debounce'
 import './Slider.css'
 
 export default class Silder extends Component {
@@ -15,14 +14,14 @@ export default class Silder extends Component {
 
   render ({ onInput, min, max, defaultValue, disabled }) {
     return (
-       <input
-          ref={el => (this.element = el)}
-          type='range'
-          min={min}
-          max={max}
-          disabled={disabled}
-          defaultValue={defaultValue}
-          onInput={onInput}
+      <input
+        ref={el => (this.element = el)}
+        type='range'
+        min={min}
+        max={max}
+        disabled={disabled}
+        defaultValue={defaultValue}
+        onInput={onInput}
         />
     )
   }
