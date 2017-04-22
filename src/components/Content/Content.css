@@ -15,9 +15,31 @@ section.content {
 
 .content ul li {
   list-style: none;
+  position: relative;
   padding: calc(var(--spacing) / 2) var(--spacing);
   border-bottom: var(--border);
   cursor: pointer;
+}
+
+.content ul li.fixed-height {
+  height: 60px;
+}
+
+.content ul li .color {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -1px;
+  width: 35%;
+  transition: all .3s;
+  z-index: 0
+}
+
+.content ul li .control {
+  position: absolute;
+  left: var(--spacing);
+  right: var(--spacing);
+  z-index: 1;
 }
 
 .content ul li small {

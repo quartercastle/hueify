@@ -4,6 +4,7 @@ import Slider from 'components/Slider'
 import ColorWheel from 'components/ColorWheel'
 import { subscribe } from 'store'
 import { lightState } from 'node-hue-api'
+import { convertXYtoRGB } from 'node-hue-api/hue-api/rgb'
 import connectToHue from 'helpers/connectToHue'
 import debounce from 'debounce'
 
@@ -28,7 +29,7 @@ class Lights extends Component {
         light.id,
         lightState.create().transitionFast().bri(event.target.value)
       )
-      .done()
+      .done(this.props.api.updateState)
   }
 
   /**
@@ -54,7 +55,7 @@ class Lights extends Component {
         this.state.currentLight.id,
         lightState.create().rgb(...rgb)
       )
-      .done()
+      .done(this.props.api.updateState)
   }
 
   /**
@@ -107,25 +108,40 @@ class Lights extends Component {
    * @return {JSX}
    */
   renderListItem (light) {
+    const rgb = convertXYtoRGB(...light.state.xy, light.state.bri)
+
+    const gradient = {
+      background: `linear-gradient(90deg, transparent, rgb(${rgb.join(',')}))`,
+      opacity: (light.state.bri / 255)
+    }
+
     return (
-      <li key={light.id}>
-        <span>
-          <span onClick={this.openColorWheel.bind(this, light)}>
-            {light.name}
+      <li key={light.id} className='fixed-height'>
+        <span
+          onClick={this.openColorWheel.bind(this, light)}
+          className='color'
+          style={light.state.on ? gradient : {}}
+        />
+        <span className='control'>
+          <span>
+            <span onClick={this.openColorWheel.bind(this, light)}>
+              {light.name}
+            </span>
+            <input
+              type='checkbox'
+              style={{ float: 'right', cursor: 'pointer' }}
+              onChange={this.toggleLight.bind(this, light)}
+              checked={light.state.on}
+            />
           </span>
-          <input
-            type='checkbox'
-            style={{ float: 'right', cursor: 'pointer' }}
-            onChange={this.toggleLight.bind(this, light)}
-            checked={light.state.on}
+          <Slider
+            min='0'
+            max='255'
+            disabled={!light.state.on}
+            defaultValue={light.state.bri}
+            onInput={debounce(this.setLightBrightness.bind(this, light), 200)}
           />
         </span>
-        <Slider
-          min='0'
-          max='255'
-          value={light.state.bri}
-          onInput={debounce(this.setLightBrightness.bind(this, light), 200)}
-        />
       </li>
     )
   }

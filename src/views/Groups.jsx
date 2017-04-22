@@ -4,6 +4,7 @@ import Slider from 'components/Slider'
 import ColorWheel from 'components/ColorWheel'
 import { subscribe } from 'store'
 import { lightState } from 'node-hue-api'
+import { convertXYtoRGB } from 'node-hue-api/hue-api/rgb'
 import connectToHue from 'helpers/connectToHue'
 import debounce from 'debounce'
 
@@ -28,7 +29,7 @@ class Groups extends Component {
         group.id,
         lightState.create().transitionFast().bri(event.target.value)
       )
-      .done()
+      .done(this.props.api.updateState)
   }
 
   /**
@@ -54,7 +55,7 @@ class Groups extends Component {
           light,
           lightState.create().rgb(...rgb)
         )
-        .done()
+        .done(this.props.api.updateState)
     }
   }
 
@@ -113,25 +114,40 @@ class Groups extends Component {
       return null
     }
 
+    const rgb = convertXYtoRGB(...group.action.xy, group.action.bri)
+
+    const gradient = {
+      background: `linear-gradient(90deg, transparent, rgb(${rgb.join(',')}))`,
+      opacity: (group.action.bri / 255)
+    }
+
     return (
-      <li key={group.id}>
-        <span>
-          <span onClick={this.openColorWheel.bind(this, group)}>
-            {group.name}
+      <li key={group.id} className='fixed-height'>
+        <span
+          onClick={this.openColorWheel.bind(this, group)}
+          className='color'
+          style={group.action.on ? gradient : {}}
+        />
+        <span className='control'>
+          <span>
+            <span onClick={this.openColorWheel.bind(this, group)}>
+              {group.name}
+            </span>
+            <input
+              type='checkbox'
+              style={{ float: 'right', cursor: 'pointer' }}
+              onChange={this.toggleLights.bind(this, group)}
+              checked={group.action.on}
+            />
           </span>
-          <input
-            type='checkbox'
-            style={{ float: 'right', cursor: 'pointer' }}
-            onChange={this.toggleLights.bind(this, group)}
-            checked={group.action.on}
+          <Slider
+            min='0'
+            max='255'
+            disabled={!group.action.on}
+            defaultValue={group.action.bri}
+            onInput={debounce(this.setGroupBrightness.bind(this, group), 200)}
           />
         </span>
-        <Slider
-          min='0'
-          max='255'
-          value={group.action.bri}
-          onInput={debounce(this.setGroupBrightness.bind(this, group), 200)}
-        />
       </li>
     )
   }

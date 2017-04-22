@@ -8,6 +8,7 @@
   background: var(--body-bg);
   align-items: center;
   animation: fadeIn .1s ease-in;
+  z-index: 99;
 }
 
 .color-overlay .wheel {
