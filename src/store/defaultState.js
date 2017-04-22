@@ -1,5 +1,5 @@
 export default {
-  view: 'lights',
+  view: 'Lights',
   bridge: {},
   lights: [],
   groups: [],

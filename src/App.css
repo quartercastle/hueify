@@ -29,12 +29,8 @@ body.dark {
   --header-bg: rgba(0, 0, 0, 1);
   --body-bg: rgba(0, 0, 0, 0.75);
   --border: solid 1px rgba(255, 255, 255, 0.05);
-  --font-family: verdana;
-  --font-size: 16px;
   --color: rgba(255, 255, 255, .6);
   --grey: rgba(255, 255, 255, 0.3);
-  --blue: #2983f0;
-  --box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 *, *:before, *:after {

@@ -17,9 +17,9 @@ const App = subscribe(({ bridge, view }) => {
 
   return (
     <Views view={view}>
-      <Lights name='lights' />
-      <Groups name='groups' />
-      <Settings name='settings' />
+      <Lights name='Lights' />
+      <Groups name='Groups' />
+      <Settings name='Settings' />
     </Views>
   )
 })

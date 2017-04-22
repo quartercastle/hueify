@@ -31,28 +31,29 @@ class Header extends Component {
    */
   render () {
     return (
-      <header className={this.props.view}>
+      <header className={this.props.view.toLowerCase()}>
         <ul>
-          <li
-            onClick={this.setView.bind(this, 'lights')}
-            className={this.isView('lights')}
-          >
-            Lights
-          </li>
-          <li
-            onClick={this.setView.bind(this, 'groups')}
-            className={this.isView('groups')}
-          >
-            Groups
-          </li>
-          <li
-            onClick={this.setView.bind(this, 'settings')}
-            className={this.isView('settings')}
-          >
-            Settings
-          </li>
+          {this.renderTab('Lights')}
+          {this.renderTab('Groups')}
+          {this.renderTab('Settings')}
         </ul>
       </header>
+    )
+  }
+
+  /**
+   * Render a tab
+   * @param  {String}  name
+   * @return {JSX}
+   */
+  renderTab (name) {
+    return (
+      <li
+        onClick={this.setView.bind(this, name)}
+        className={this.isView(name)}
+      >
+        {name}
+      </li>
     )
   }
 }
