@@ -3,7 +3,7 @@
 
 #### About
 Hueify is a simple controller for your Philips Hue lights. It's built with
-[Electron](https://electron.atom.io/) and with [Preact](https://preactjs.com/).
+[Electron](https://electron.atom.io/) and [Preact](https://preactjs.com/).
 
 ![Screenshot](https://kvartborg.net/assets/img/github/hueify-screenshot.png)
 
