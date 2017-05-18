@@ -6,7 +6,7 @@ import store, { subscribe } from 'store'
 class Settings extends Component {
   /**
    * Toggle dark mode on body
-   * TODO should be save in the store in a later version
+   * TODO should be saved in the store in a later version
    * @private
    */
   toggleDarkMode () {
