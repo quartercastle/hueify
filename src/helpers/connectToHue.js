@@ -5,69 +5,104 @@ import setGroups from 'store/actions/setGroups'
 import setHost from 'store/actions/setHost'
 import store from 'store'
 
-export default WrappedComponent => {
-  return class extends Component {
-    state = {
-      api: null
+/**
+ * Higher order component which will setup the Hue API connection
+ * @param  {JSX} WrappedComponent
+ * @return {JSX}
+ */
+export default WrappedComponent => class extends Component {
+  /**
+   * State
+   * @type {Object}
+   */
+  state = {
+    api: null
+  }
+
+  /**
+   * Search for a bridge and connect when HOC mounts
+   * @private
+   */
+  componentDidMount () {
+    this.searchForBrigde()
+    this.connect()
+  }
+
+  /**
+   * Setup the Hue connection and save it in the state
+   * @private
+   */
+  connect () {
+    if (!this.props.bridge.token) {
+      return
     }
 
-    componentDidMount () {
-      this.searchForBrigde()
-      this.connect()
-    }
+    const api = new HueApi(
+      this.props.settings.host,
+      this.props.bridge.token,
+      2000
+    )
 
-    connect () {
-      if (!this.props.bridge.token) {
-        return
-      }
+    this.setState({ api }, () => {
+      this.updateState()
+      this.state.api.updateState = this.updateState.bind(this)
+    })
+  }
 
-      const api = new HueApi(
-        this.props.settings.host,
-        this.props.bridge.token,
-        2000
-      )
+  /**
+   * Search for a bridge
+   * @private
+   */
+  searchForBrigde () {
+    hue.upnpSearch(3000)
+      .then(bridge => {
+        if (bridge.length === 0) {
+          return
+        }
 
-      this.setState({ api }, () => {
-        this.updateState()
-        this.state.api.updateState = this.updateState.bind(this)
+        store.dispatch(setHost(bridge[0].ipaddress))
       })
-    }
+      .done(() =>
+        this.connect()
+      )
+  }
 
-    searchForBrigde () {
-      hue.upnpSearch(3000)
-        .then(bridge => {
-          if (bridge.length === 0) {
-            return
-          }
+  /**
+   * Get the current lightstate for lights and groups from the Hue bridge
+   * @public
+   */
+  updateState () {
+    this.getCurrentLightsState()
+    this.getCurrentLightGroups()
+  }
 
-          store.dispatch(setHost(bridge[0].ipaddress))
-        })
-        .done(() =>
-          this.connect()
-        )
-    }
+  /**
+   * Get ligthstate for lights
+   * @private
+   */
+  getCurrentLightsState () {
+    this.state.api.lights()
+      .then(({ lights }) => store.dispatch(setLights(lights)))
+      .done()
+  }
 
-    updateState () {
-      this.getCurrentLightsState()
-      this.getCurrentLightGroups()
-    }
+  /**
+   * Get ligthstate for groups
+   * @private
+   */
+  getCurrentLightGroups () {
+    this.state.api.groups()
+      .then(groups => {
+        store.dispatch(setGroups(groups))
+      })
+      .done()
+  }
 
-    getCurrentLightsState () {
-      this.state.api.lights()
-        .then(({ lights }) => store.dispatch(setLights(lights)))
-        .done()
-    }
-
-    getCurrentLightGroups () {
-      this.state.api.groups()
-        .then(groups => {
-          store.dispatch(setGroups(groups))
-        })
-        .done()
-    }
-
-    render () {
-      return <WrappedComponent {...this.state} {...this.props} />
-    }
+  /**
+   * Pass the Hue api to the WrappedComponent as props
+   * @return {JSX}
+   */
+  render () {
+    return <WrappedComponent {...this.state} {...this.props} />
   }
 }

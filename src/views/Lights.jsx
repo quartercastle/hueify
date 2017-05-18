@@ -59,25 +59,14 @@ class Lights extends Component {
   }
 
   /**
-   * Open the color wheel
+   * Toggle the color wheel
    * @param  {Object} light
    * @private
    */
-  openColorWheel (light) {
+  toggleColorWheel (light) {
     this.setState({
-      colorWheel: true,
+      colorWheel: !!light,
       currentLight: light
-    })
-  }
-
-  /**
-   * Close color wheel
-   * @private
-   */
-  closeColorWheel () {
-    this.setState({
-      colorWheel: false,
-      currentLight: null
     })
   }
 
@@ -96,7 +85,7 @@ class Lights extends Component {
         <ColorWheel
           show={this.state.colorWheel}
           onClick={this.setColor.bind(this)}
-          onClose={this.closeColorWheel.bind(this)}
+          onClose={this.toggleColorWheel.bind(this)}
         />
       </Layout>
     )
@@ -118,13 +107,13 @@ class Lights extends Component {
     return (
       <li key={light.id} className='fixed-height'>
         <span
-          onClick={this.openColorWheel.bind(this, light)}
+          onClick={this.toggleColorWheel.bind(this, light)}
           className='color'
           style={light.state.on ? gradient : {}}
         />
         <span className='control'>
           <span>
-            <span onClick={this.openColorWheel.bind(this, light)}>
+            <span onClick={this.toggleColorWheel.bind(this, light)}>
               {light.name}
             </span>
             <input

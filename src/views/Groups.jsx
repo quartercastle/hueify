@@ -60,25 +60,14 @@ class Groups extends Component {
   }
 
   /**
-   * Open the color wheel and set the selected group
+   * Toggle the color wheel and set the selected group
    * @param  {Object} group
    * @private
    */
-  openColorWheel (group) {
+  toggleColorWheel (group) {
     this.setState({
-      colorWheel: true,
+      colorWheel: !!group,
       currentLightGroup: group
-    })
-  }
-
-  /**
-   * Close the color wheel
-   * @private
-   */
-  closeColorWheel () {
-    this.setState({
-      colorWheel: false,
-      currentLightGroup: null
     })
   }
 
@@ -97,7 +86,7 @@ class Groups extends Component {
         <ColorWheel
           show={this.state.colorWheel}
           onClick={this.setColor.bind(this)}
-          onClose={this.closeColorWheel.bind(this)}
+          onClose={this.toggleColorWheel.bind(this)}
         />
       </Layout>
     )
@@ -124,13 +113,13 @@ class Groups extends Component {
     return (
       <li key={group.id} className='fixed-height'>
         <span
-          onClick={this.openColorWheel.bind(this, group)}
+          onClick={this.toggleColorWheel.bind(this, group)}
           className='color'
           style={group.action.on ? gradient : {}}
         />
         <span className='control'>
           <span>
-            <span onClick={this.openColorWheel.bind(this, group)}>
+            <span onClick={this.toggleColorWheel.bind(this, group)}>
               {group.name}
             </span>
             <input
