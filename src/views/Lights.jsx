@@ -95,7 +95,7 @@ class Lights extends Component {
         </ul>
         <ColorWheel
           show={this.state.colorWheel}
-          onChange={this.setColor.bind(this)}
+          onClick={this.setColor.bind(this)}
           onClose={this.closeColorWheel.bind(this)}
         />
       </Layout>

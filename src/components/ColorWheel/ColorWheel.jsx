@@ -3,23 +3,54 @@ import { Component } from 'preact'
 import './ColorWheel.css'
 
 export default class ColorWheel extends Component {
+  /**
+   * The canvas element
+   * @type {DOMElement|null}
+   */
   canvas = null
+
+  /**
+   * The diameter of the color wheel
+   * @type {Number}
+   */
   size = 250
+
+  /**
+   * The center coordinates for the wheel
+   * @type {Array|null}
+   */
   center = null
 
+  /**
+   * Setup the canvas when the component mounts
+   * @private
+   */
   componenDidMount () {
     this.setupCanvas()
   }
 
+  /**
+   * When the component receives new props, then update the canvas
+   * @param  {Object} nextProps
+   * @private
+   */
   componentWillReceiveProps (nextProps) {
     this.props = nextProps
     this.setupCanvas()
   }
 
+  /**
+   * Remove the DOM reference from memory
+   * @private
+   */
   componentWillUnmount () {
     this.canvas = null
   }
 
+  /**
+   * Setup canvas
+   * @private
+   */
   setupCanvas () {
     if (!this.props.show) {
       return
@@ -34,6 +65,10 @@ export default class ColorWheel extends Component {
     })
   }
 
+  /**
+   * Draw the color wheel
+   * @private
+   */
   drawCircle () {
     const context = this.canvas.getContext('2d')
     const [x, y] = this.center
@@ -51,6 +86,11 @@ export default class ColorWheel extends Component {
     }
   }
 
+  /**
+   * Draw a gradient from the middle of the circle which goes
+   * from white to transparent
+   * @private
+   */
   drawInnerCircle () {
     const context = this.canvas.getContext('2d')
     const [x, y] = this.center
@@ -69,16 +109,32 @@ export default class ColorWheel extends Component {
     context.fill()
   }
 
+  /**
+   * Convert image to canvas
+   * @param  {Image} image
+   * @private
+   */
   convertImageToCanvas (image) {
     this.canvas.getContext('2d').drawImage(image, 0, 0)
   }
 
+  /**
+   * Convert canvas to image
+   * @return {Image}
+   * @private
+   */
   convertCanvasToImage () {
     const image = new Image()
     image.src = this.canvas.toDataURL('image/png')
     return image
   }
 
+  /**
+   * Fire the onClick event when the color wheel is click.
+   * Send rgb value as arguments in the callback function
+   * @param  {Object} event
+   * @private
+   */
   onClick (event) {
     const { data } = this.canvas.getContext('2d').getImageData(
       event.offsetX,
@@ -87,11 +143,17 @@ export default class ColorWheel extends Component {
       1
     )
 
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(data)
+    if (typeof this.props.onClick === 'function') {
+      this.props.onClick(data)
     }
   }
 
+  /**
+   * Close the color wheel when the overlay element is clicked and fire
+   * the onClose event
+   * @param  {Object} event
+   * @private
+   */
   close (event) {
     if (event.target.classList.contains('wheel')) {
       return
@@ -102,6 +164,12 @@ export default class ColorWheel extends Component {
     }
   }
 
+  /**
+   * Render the color wheel canvas
+   * @param  {Object} props
+   * @return {JSX}
+   * @public
+   */
   render ({ show }) {
     if (!show) {
       return null
