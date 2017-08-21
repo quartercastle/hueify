@@ -1,5 +1,6 @@
 import { Component } from 'preact'
 import Layout from 'components/Layout'
+import Toggle from 'components/Toggle'
 import setBridge from 'store/actions/setBridge'
 import store, { subscribe } from 'store'
 
@@ -11,6 +12,7 @@ class Settings extends Component {
    */
   toggleDarkMode () {
     document.body.classList.toggle('dark')
+    this.forceUpdate()
   }
 
   /**
@@ -36,11 +38,10 @@ class Settings extends Component {
           </li>
           <li>
             Dark mode
-            <input
-              onClick={this.toggleDarkMode}
+            <Toggle
+              onClick={this.toggleDarkMode.bind(this)}
               checked={document.body.classList.contains('dark')}
-              style={{ float: 'right' }}
-              type='checkbox'
+              style={{ float: 'right', marginTop: '0px' }}
             />
             {settings.darkMode}
           </li>

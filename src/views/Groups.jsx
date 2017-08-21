@@ -2,6 +2,7 @@ import { Component } from 'preact'
 import Layout from 'components/Layout'
 import Slider from 'components/Slider'
 import ColorWheel from 'components/ColorWheel'
+import Toggle from 'components/Toggle'
 import { subscribe } from 'store'
 import { lightState } from 'node-hue-api'
 import { convertXYtoRGB } from 'node-hue-api/hue-api/rgb'
@@ -119,15 +120,14 @@ class Groups extends Component {
         />
         <span className='control'>
           <span>
+            <Toggle
+              style={{ marginRight: '10px' }}
+              checked={group.action.on}
+              onClick={this.toggleLights.bind(this, group)}
+            />
             <span onClick={this.toggleColorWheel.bind(this, group)}>
               {group.name}
             </span>
-            <input
-              type='checkbox'
-              style={{ float: 'right', cursor: 'pointer' }}
-              onChange={this.toggleLights.bind(this, group)}
-              checked={group.action.on}
-            />
           </span>
           <Slider
             min='0'
