@@ -2,6 +2,7 @@ import { Component } from 'preact'
 import Layout from 'components/Layout'
 import Slider from 'components/Slider'
 import ColorWheel from 'components/ColorWheel'
+import Toggle from 'components/Toggle'
 import { subscribe } from 'store'
 import { lightState } from 'node-hue-api'
 import { convertXYtoRGB } from 'node-hue-api/hue-api/rgb'
@@ -113,15 +114,14 @@ class Lights extends Component {
         />
         <span className='control'>
           <span>
+            <Toggle
+              style={{ marginRight: '10px' }}
+              checked={light.state.on}
+              onClick={this.toggleLight.bind(this, light)}
+            />
             <span onClick={this.toggleColorWheel.bind(this, light)}>
               {light.name}
             </span>
-            <input
-              type='checkbox'
-              style={{ float: 'right', cursor: 'pointer' }}
-              onChange={this.toggleLight.bind(this, light)}
-              checked={light.state.on}
-            />
           </span>
           <Slider
             min='0'

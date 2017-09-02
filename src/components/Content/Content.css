@@ -30,7 +30,7 @@ section.content {
   top: 0;
   right: 0;
   bottom: -1px;
-  width: 35%;
+  width: 40%;
   transition: all .3s;
   z-index: 0
 }
