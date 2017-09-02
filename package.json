@@ -12,11 +12,11 @@
     "test": "npm run lint",
     "lint": "standard | snazzy",
     "lint:fix": "standard --fix | snazzy",
-    "build": "npm test && ./node_modules/.bin/electron-packager . Hueify --all --asar --ignore='\\.env' --out=./dist --overwrite",
-    "build:osx": "npm test && electron-packager . Hueify --platform=darwin --ignore='\\.env' --asar --out=./dist --overwrite",
-    "build:test": "npm test && ./node_modules/.bin/electron-packager . Hueify --all --ignore='\\.env' --out=./dist --overwrite",
-    "build:linux": "npm test && ./node_modules/.bin/electron-packager . Hueify --platform=linux --ignore='\\.env' --asar --out=./dist --overwrite",
-    "build:win": "npm test && ./node_modules/.bin/electron-packager . Hueify --platform=win32 --ignore='\\.env' --asar --out=./dist --overwrite"
+    "build": "npm test && electron-packager . Hueify --all --asar --ignore='\\.env' --out=./dist --overwrite",
+    "build:osx": "npm test && electron-packager . Hueify --platform=darwin --icon=static/images/icon.icns --ignore='\\.env' --asar --out=./dist --overwrite",
+    "build:test": "npm test && electron-packager . Hueify --all --ignore='\\.env' --out=./dist --overwrite",
+    "build:linux": "npm test && electron-packager . Hueify --platform=linux --ignore='\\.env' --asar --out=./dist --overwrite",
+    "build:win": "npm test && electron-packager . Hueify --platform=win32 --ignore='\\.env' --asar --out=./dist --overwrite"
   },
   "keywords": [
     "philips",
