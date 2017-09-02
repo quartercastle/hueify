@@ -43,11 +43,11 @@
     "snazzy": "^7.0.0",
     "standard": "^10.0.3",
     "style-loader": "^0.13.2",
+    "electron": "^1.6.2",
     "webpack": "^2.2.1"
   },
   "dependencies": {
     "debounce": "^1.0.0",
-    "electron": "^1.6.2",
     "electron-positioner": "^3.0.0",
     "node-hue-api": "^2.4.2"
   },
