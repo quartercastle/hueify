@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render the content component 1`] = `"<section class=\\"content\\"></section>"`;
