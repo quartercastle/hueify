@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render the header component 1`] = `"<header class=\\"lights\\"><ul><li class=\\"active\\">Lights</li><li class>Groups</li><li class>Settings</li></ul></header>"`;
