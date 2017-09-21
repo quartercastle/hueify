@@ -1,5 +1,5 @@
 <p align="center"><img height='100' src="https://kvartborg.net/assets/img/github/hueify-logo.png"></p>
-
+<p align="center"><img src="https://travis-ci.org/kvartborg/hueify.svg?branch=test-components" /></p>
 
 ### About
 Hueify is a simple controller for your Philips Hue lights. It's built with
