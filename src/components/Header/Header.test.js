@@ -14,7 +14,12 @@ test('Should render the header component', () => {
 })
 
 test('Header should dispatch view change if a tab is clicked', done => {
-  render(<Views view='header'><Header name='header' /></Views>, document.body)
+  render(
+    <Views view='header'>
+      <Header name='header' />
+    </Views>,
+    document.body
+  )
   store.subscribe(done)
   document.querySelectorAll('li')[1].click()
 })
