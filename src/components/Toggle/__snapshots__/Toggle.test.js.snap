@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render checked toggle button 1`] = `"<div class=\\"toggle-button active\\"></div>"`;
+
+exports[`Should render toggle button 1`] = `"<div class=\\"toggle-button \\"></div>"`;
+
+exports[`Should style component 1`] = `"<div style=\\"backgorund: green;\\" class=\\"toggle-button \\"></div>"`;

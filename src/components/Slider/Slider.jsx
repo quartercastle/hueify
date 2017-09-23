@@ -39,7 +39,7 @@ export default class Silder extends Component {
         disabled={disabled}
         defaultValue={defaultValue}
         onInput={onInput}
-        />
+      />
     )
   }
 }

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render default slider component 1`] = `"<input type=\\"range\\" />"`;
+
+exports[`Should render disabled slider 1`] = `"<input type=\\"range\\" disabled />"`;
+
+exports[`Should render slider with min/max value 1`] = `"<input type=\\"range\\" min=\\"0\\" max=\\"100\\" />"`;
+
+exports[`Should render with a default value 1`] = `"<input type=\\"range\\" defaultValue=\\"100\\" />"`;

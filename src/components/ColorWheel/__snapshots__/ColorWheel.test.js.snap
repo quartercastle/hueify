@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render the color wheel if the show prop is set 1`] = `"<div class=\\"color-overlay\\"><canvas class=\\"wheel\\" width=\\"250\\" height=\\"250\\" id=\\"canvas\\"></canvas></div>"`;
+
+exports[`Should return color coordinates if color wheel is clicked 1`] = `
+Array [
+  1,
+  2,
+  3,
+]
+`;
+
+exports[`Shouldn't render anything if no props is set 1`] = `""`;
