@@ -10,7 +10,7 @@ Hueify is a simple controller for your Philips Hue lights. It's built with
 
 ![Demo](https://github.com/kvartborg/hueify/blob/master/demo.gif)
 
-### Start the app in dev mode
+### Start the app in dev mode m
 ```sh
 npm run dev
 ```
